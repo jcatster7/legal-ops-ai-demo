@@ -72,7 +72,7 @@
       <div class="console" id="demo-panel" role="tabpanel" aria-live="polite" aria-labelledby="tab-beginner"></div>
     </section>
   </main>
-`;var a=document.querySelector(`#demo-panel`),o=Array.from(document.querySelectorAll(`.demo-tab`));if(!a)throw Error(`Demo panel not found`);var s=a;async function c(e){let t=new TextEncoder().encode(e),n=await crypto.subtle.digest(`SHA-256`,t);return Array.from(new Uint8Array(n)).map(e=>e.toString(16).padStart(2,`0`)).join(``)}function l(){if(sessionStorage.getItem(e)===`true`)return;i.classList.add(`is-locked`),i.insertAdjacentHTML(`afterbegin`,`
+`;var a=document.querySelector(`#demo-panel`),o=Array.from(document.querySelectorAll(`.demo-tab`));if(!a)throw Error(`Demo panel not found`);var s=a;async function c(e){if(!globalThis.crypto?.subtle)return u(e);let t=new TextEncoder().encode(e),n=await crypto.subtle.digest(`SHA-256`,t);return Array.from(new Uint8Array(n)).map(e=>e.toString(16).padStart(2,`0`)).join(``)}function l(e,t){return e>>>t|e<<32-t}function u(e){let t=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],n=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225],r=Array.from(new TextEncoder().encode(e)),i=r.length*8,a=Array(64).fill(0);for(r.push(128);r.length%64!=56;)r.push(0);let o=Math.floor(i/4294967296),s=i>>>0;for(let e=24;e>=0;e-=8)r.push(o>>>e&255);for(let e=24;e>=0;e-=8)r.push(s>>>e&255);for(let e=0;e<r.length;e+=64){for(let t=0;t<16;t+=1){let n=e+t*4;a[t]=(r[n]<<24|r[n+1]<<16|r[n+2]<<8|r[n+3])>>>0}for(let e=16;e<64;e+=1){let t=l(a[e-15],7)^l(a[e-15],18)^a[e-15]>>>3,n=l(a[e-2],17)^l(a[e-2],19)^a[e-2]>>>10;a[e]=a[e-16]+t+a[e-7]+n>>>0}let[i,o,s,c,u,d,f,p]=n;for(let e=0;e<64;e+=1){let n=l(u,6)^l(u,11)^l(u,25),r=u&d^~u&f,m=p+n+r+t[e]+a[e]>>>0,h=(l(i,2)^l(i,13)^l(i,22))+(i&o^i&s^o&s)>>>0;p=f,f=d,d=u,u=c+m>>>0,c=s,s=o,o=i,i=m+h>>>0}n[0]=n[0]+i>>>0,n[1]=n[1]+o>>>0,n[2]=n[2]+s>>>0,n[3]=n[3]+c>>>0,n[4]=n[4]+u>>>0,n[5]=n[5]+d>>>0,n[6]=n[6]+f>>>0,n[7]=n[7]+p>>>0}return n.map(e=>e.toString(16).padStart(8,`0`)).join(``)}function d(){if(sessionStorage.getItem(e)===`true`)return;i.classList.add(`is-locked`),i.insertAdjacentHTML(`afterbegin`,`
       <section class="access-gate" aria-labelledby="access-title">
         <form class="access-card">
           <p class="eyebrow">Private demo</p>
@@ -86,7 +86,7 @@
           <p class="access-error" role="alert" aria-live="polite"></p>
         </form>
       </section>
-    `);let n=i.querySelector(`.access-gate`),r=i.querySelector(`.access-card`),a=i.querySelector(`.access-password`),o=i.querySelector(`.access-error`);r?.addEventListener(`submit`,async r=>{if(r.preventDefault(),!(!a||!o||!n)){if(await c(a.value)!==t){o.textContent=`Password not recognized.`,a.select();return}sessionStorage.setItem(e,`true`),i.classList.remove(`is-locked`),n.remove()}})}function u(e){return e.toLowerCase()}function d(e){let t=n.find(t=>t.key===e)??n[0];o.forEach(e=>{let n=e.dataset.demo===t.key;e.classList.toggle(`is-active`,n),e.setAttribute(`aria-selected`,String(n)),e.setAttribute(`tabindex`,n?`0`:`-1`)}),s.setAttribute(`aria-labelledby`,`tab-${t.key}`),s.innerHTML=`
+    `);let n=i.querySelector(`.access-gate`),r=i.querySelector(`.access-card`),a=i.querySelector(`.access-password`),o=i.querySelector(`.access-error`);r?.addEventListener(`submit`,async r=>{if(r.preventDefault(),!(!a||!o||!n)){if(await c(a.value)!==t){o.textContent=`Password not recognized.`,a.select();return}sessionStorage.setItem(e,`true`),i.classList.remove(`is-locked`),n.remove()}})}function f(e){return e.toLowerCase()}function p(e){let t=n.find(t=>t.key===e)??n[0];o.forEach(e=>{let n=e.dataset.demo===t.key;e.classList.toggle(`is-active`,n),e.setAttribute(`aria-selected`,String(n)),e.setAttribute(`tabindex`,n?`0`:`-1`)}),s.setAttribute(`aria-labelledby`,`tab-${t.key}`),s.innerHTML=`
     <div class="console__top">
       <section class="intake" aria-label="${t.level} intake">
         <div>
@@ -113,7 +113,7 @@
 
       <section class="run-panel" aria-label="Workflow controls">
         <div class="status-card">
-          <span class="risk risk--${u(t.risk)}">${t.risk} risk</span>
+          <span class="risk risk--${f(t.risk)}">${t.risk} risk</span>
           <strong>${t.confidence}% grounded</strong>
           <p>${t.reviewGate}</p>
         </div>
@@ -177,4 +177,4 @@
         </ul>
       </article>
     </div>
-  `;let r=s.querySelector(`.approval-button`),i=s.querySelector(`.approval-status`);r?.addEventListener(`click`,()=>{i&&(i.textContent=`${t.approvalCopy} opened. External send remains blocked until attorney sign-off.`)})}o.forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.demo;t&&d(t)}),e.addEventListener(`keydown`,t=>{let n=o.indexOf(e),r=o.length-1,i;if(t.key===`ArrowRight`&&(i=n===r?0:n+1),t.key===`ArrowLeft`&&(i=n===0?r:n-1),t.key===`Home`&&(i=0),t.key===`End`&&(i=r),i===void 0)return;t.preventDefault();let a=o[i],s=a.dataset.demo;s&&(a.focus(),d(s))})}),d(`beginner`),l();
+  `;let r=s.querySelector(`.approval-button`),i=s.querySelector(`.approval-status`);r?.addEventListener(`click`,()=>{i&&(i.textContent=`${t.approvalCopy} opened. External send remains blocked until attorney sign-off.`)})}o.forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.demo;t&&p(t)}),e.addEventListener(`keydown`,t=>{let n=o.indexOf(e),r=o.length-1,i;if(t.key===`ArrowRight`&&(i=n===r?0:n+1),t.key===`ArrowLeft`&&(i=n===0?r:n-1),t.key===`Home`&&(i=0),t.key===`End`&&(i=r),i===void 0)return;t.preventDefault();let a=o[i],s=a.dataset.demo;s&&(a.focus(),p(s))})}),p(`beginner`),d();
