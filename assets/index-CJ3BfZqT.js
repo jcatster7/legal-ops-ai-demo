@@ -86,7 +86,7 @@
           <p class="access-error" role="alert" aria-live="polite"></p>
         </form>
       </section>
-    `);let n=i.querySelector(`.access-gate`),r=i.querySelector(`.access-card`),a=i.querySelector(`.access-password`),o=i.querySelector(`.access-error`);r?.addEventListener(`submit`,async r=>{if(r.preventDefault(),!(!a||!o||!n)){if(await c(a.value)!==t){o.textContent=`Password not recognized.`,a.select();return}sessionStorage.setItem(e,`true`),i.classList.remove(`is-locked`),n.remove()}})}function f(e){return e.toLowerCase()}function p(e){let t=n.find(t=>t.key===e)??n[0];o.forEach(e=>{let n=e.dataset.demo===t.key;e.classList.toggle(`is-active`,n),e.setAttribute(`aria-selected`,String(n)),e.setAttribute(`tabindex`,n?`0`:`-1`)}),s.setAttribute(`aria-labelledby`,`tab-${t.key}`),s.innerHTML=`
+    `);let n=i.querySelector(`.access-gate`),r=i.querySelector(`.access-card`),a=i.querySelector(`.access-password`),o=i.querySelector(`.access-error`);r?.addEventListener(`submit`,async r=>{if(r.preventDefault(),!(!a||!o||!n)){if(await c(a.value)!==t){o.textContent=`Password not recognized.`,a.select();return}sessionStorage.setItem(e,`true`),i.classList.remove(`is-locked`),n.remove()}})}function f(e){return e.toLowerCase()}function p(e,t){let n=e.trim().replace(/\s+/g,` `);return n?n.length>94?`${n.slice(0,91)}...`:n:t}function m(e){return e.key===`beginner`?`First-pass contract packet refreshed from the fields above: checklist notes, missing-item request, and lawyer review items are ready.`:e.key===`medium`?`Complaint triage refreshed from the fields above: risk flags are separated from routine support issues, and outside reply stays blocked.`:`Research packet refreshed from the fields above: fact question, source check, and evidence binder request are ready for attorney review.`}function h(e,t,n,r){let i=p(t,e.matterValue),a=p(n,e.intakeValue),o=p(r,e.target);return e.key===`beginner`?[`Matter checked: ${i}.`,`Request captured: ${a}.`,`Draft letter is prepared, but sending remains blocked until attorney approval.`,`Posting fit: ${o}.`]:e.key===`medium`?[`Inbound item checked: ${i}.`,`Risk language reviewed from message: ${a}.`,`Automatic reply remains blocked because the item needs legal review.`,`Posting fit: ${o}.`]:[`Research matter framed: ${i}.`,`Question and binder request captured from: ${a}.`,`No legal reference is allowed into the packet unless it has a clickable source.`,`Posting fit: ${o}.`]}function g(e){let t=new Intl.DateTimeFormat(`en-US`,{hour:`2-digit`,minute:`2-digit`}).format(new Date);return e.key===`beginner`?[`${t} fields edited on-screen`,`${t} checklist packet refreshed`,`${t} draft saved; attorney approval still required`]:e.key===`medium`?[`${t} message triaged from edited fields`,`${t} high-risk summary refreshed`,`${t} outside reply blocked until attorney review`]:[`${t} research question refreshed`,`${t} evidence binder request prepared`,`${t} source check required before attorney use`]}function _(e,t){e&&e.replaceChildren(...t.map(e=>{let t=document.createElement(`li`);return t.textContent=e,t}))}function v(e){let t=n.find(t=>t.key===e)??n[0];o.forEach(e=>{let n=e.dataset.demo===t.key;e.classList.toggle(`is-active`,n),e.setAttribute(`aria-selected`,String(n)),e.setAttribute(`tabindex`,n?`0`:`-1`)}),s.setAttribute(`aria-labelledby`,`tab-${t.key}`),s.innerHTML=`
     <div class="console__top">
       <section class="intake" aria-label="${t.level} intake">
         <div>
@@ -97,18 +97,18 @@
 
         <label>
           <span>${t.matterLabel}</span>
-          <input type="text" value="${t.matterValue}" />
+          <input class="matter-field" type="text" value="${t.matterValue}" />
         </label>
 
         <label>
           <span>${t.intakeLabel}</span>
-          <textarea>${t.intakeValue}</textarea>
+          <textarea class="intake-field">${t.intakeValue}</textarea>
         </label>
         <p class="field-note">Use the sample text or replace it with a real contract, complaint, or fact pattern.</p>
 
         <label class="target">
           <span>Posting fit</span>
-          <textarea>${t.target}</textarea>
+          <textarea class="target-field">${t.target}</textarea>
         </label>
       </section>
 
@@ -127,6 +127,13 @@
                 </div>
               `).join(``)}
         </div>
+
+        <button class="button button--secondary run-button" type="button">
+          Run helper on these fields
+        </button>
+        <p class="run-status" role="status" aria-live="polite">
+          Edit the fields, then run the helper to refresh the work packet.
+        </p>
 
         <button class="button button--primary approval-button" type="button" data-approval="${t.key}">
           ${t.approvalCopy}
@@ -152,8 +159,8 @@
           <span>Prepared work</span>
           <strong>${t.resultTitle}</strong>
         </div>
-        <p>${t.resultSummary}</p>
-        <ul>
+        <p class="result-summary">${t.resultSummary}</p>
+        <ul class="findings-list">
           ${t.findings.map(e=>`<li>${e}</li>`).join(``)}
         </ul>
       </article>
@@ -178,4 +185,4 @@
         </ul>
       </article>
     </div>
-  `;let r=s.querySelector(`.approval-button`),i=s.querySelector(`.approval-status`);r?.addEventListener(`click`,()=>{i&&(i.textContent=`${t.approvalCopy} opened. Nothing is sent outside the office until the attorney signs off.`)})}o.forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.demo;t&&p(t)}),e.addEventListener(`keydown`,t=>{let n=o.indexOf(e),r=o.length-1,i;if(t.key===`ArrowRight`&&(i=n===r?0:n+1),t.key===`ArrowLeft`&&(i=n===0?r:n-1),t.key===`Home`&&(i=0),t.key===`End`&&(i=r),i===void 0)return;t.preventDefault();let a=o[i],s=a.dataset.demo;s&&(a.focus(),p(s))})}),p(`beginner`),d();
+  `;let r=s.querySelector(`.matter-field`),i=s.querySelector(`.intake-field`),a=s.querySelector(`.target-field`),c=s.querySelector(`.run-button`),l=s.querySelector(`.run-status`),u=s.querySelector(`.result-summary`),d=s.querySelector(`.findings-list`),p=s.querySelector(`.audit-list`),v=s.querySelector(`.approval-button`),y=s.querySelector(`.approval-status`);c?.addEventListener(`click`,()=>{let e=r?.value??``,n=i?.value??``,o=a?.value??``;u&&(u.textContent=m(t)),_(d,h(t,e,n,o)),_(p,g(t)),l&&(l.textContent=`Work packet refreshed from the fields on this screen.`),y&&(y.textContent=`Packet refreshed. Attorney approval is still required before anything leaves the office.`)}),v?.addEventListener(`click`,()=>{y&&(y.textContent=`${t.approvalCopy} opened. Nothing is sent outside the office until the attorney signs off.`)})}o.forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.demo;t&&v(t)}),e.addEventListener(`keydown`,t=>{let n=o.indexOf(e),r=o.length-1,i;if(t.key===`ArrowRight`&&(i=n===r?0:n+1),t.key===`ArrowLeft`&&(i=n===0?r:n-1),t.key===`Home`&&(i=0),t.key===`End`&&(i=r),i===void 0)return;t.preventDefault();let a=o[i],s=a.dataset.demo;s&&(a.focus(),v(s))})}),v(`beginner`),d();
