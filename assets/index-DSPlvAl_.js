@@ -106,10 +106,10 @@
         </label>
         <p class="field-note">Use the sample text or replace it with a real contract, complaint, or fact pattern.</p>
 
-        <div class="target">
+        <label class="target">
           <span>Posting fit</span>
-          <strong>${t.target}</strong>
-        </div>
+          <textarea>${t.target}</textarea>
+        </label>
       </section>
 
       <section class="run-panel" aria-label="What the tool does">
