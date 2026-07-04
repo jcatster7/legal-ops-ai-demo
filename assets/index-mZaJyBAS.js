@@ -86,7 +86,8 @@
           <p class="access-error" role="alert" aria-live="polite"></p>
         </form>
       </section>
-    `);let n=i.querySelector(`.access-gate`),r=i.querySelector(`.access-card`),a=i.querySelector(`.access-password`),o=i.querySelector(`.access-error`);r?.addEventListener(`submit`,async r=>{if(r.preventDefault(),!(!a||!o||!n)){if(await c(a.value)!==t){o.textContent=`Password not recognized.`,a.select();return}sessionStorage.setItem(e,`true`),i.classList.remove(`is-locked`),n.remove()}})}function f(e){return e.toLowerCase()}function p(e,t){let n=e.trim().replace(/\s+/g,` `);return n?n.length>94?`${n.slice(0,91)}...`:n:t}function m(e){return e.key===`beginner`?`First-pass contract packet refreshed from the fields above: checklist notes, missing-item request, and lawyer review items are ready.`:e.key===`medium`?`Complaint triage refreshed from the fields above: risk flags are separated from routine support issues, and outside reply stays blocked.`:`Research packet refreshed from the fields above: fact question, source check, and evidence binder request are ready for attorney review.`}function h(e,t,n,r){let i=p(t,e.matterValue),a=p(n,e.intakeValue),o=p(r,e.target);return e.key===`beginner`?[`Matter checked: ${i}.`,`Request captured: ${a}.`,`Draft letter is prepared, but sending remains blocked until attorney approval.`,`Posting fit: ${o}.`]:e.key===`medium`?[`Inbound item checked: ${i}.`,`Risk language reviewed from message: ${a}.`,`Automatic reply remains blocked because the item needs legal review.`,`Posting fit: ${o}.`]:[`Research matter framed: ${i}.`,`Question and binder request captured from: ${a}.`,`No legal reference is allowed into the packet unless it has a clickable source.`,`Posting fit: ${o}.`]}function g(e){let t=new Intl.DateTimeFormat(`en-US`,{hour:`2-digit`,minute:`2-digit`}).format(new Date);return e.key===`beginner`?[`${t} fields edited on-screen`,`${t} checklist packet refreshed`,`${t} draft saved; attorney approval still required`]:e.key===`medium`?[`${t} message triaged from edited fields`,`${t} high-risk summary refreshed`,`${t} outside reply blocked until attorney review`]:[`${t} research question refreshed`,`${t} evidence binder request prepared`,`${t} source check required before attorney use`]}function _(e,t){e&&e.replaceChildren(...t.map(e=>{let t=document.createElement(`li`);return t.textContent=e,t}))}function v(e){let t=n.find(t=>t.key===e)??n[0];o.forEach(e=>{let n=e.dataset.demo===t.key;e.classList.toggle(`is-active`,n),e.setAttribute(`aria-selected`,String(n)),e.setAttribute(`tabindex`,n?`0`:`-1`)}),s.setAttribute(`aria-labelledby`,`tab-${t.key}`),s.innerHTML=`
+    `);let n=i.querySelector(`.access-gate`),r=i.querySelector(`.access-card`),a=i.querySelector(`.access-password`),o=i.querySelector(`.access-error`);r?.addEventListener(`submit`,async r=>{if(r.preventDefault(),!(!a||!o||!n)){if(await c(a.value)!==t){o.textContent=`Password not recognized.`,a.select();return}sessionStorage.setItem(e,`true`),i.classList.remove(`is-locked`),n.remove()}})}function f(e){return e.toLowerCase()}function p(e,t){let n=e.trim().replace(/\s+/g,` `);return n?n.length>94?`${n.slice(0,91)}...`:n:t}function m(e){return e.key===`beginner`?`First-pass contract packet refreshed from the fields above: checklist notes, missing-item request, and lawyer review items are ready.`:e.key===`medium`?`Complaint triage refreshed from the fields above: risk flags are separated from routine support issues, and outside reply stays blocked.`:`Research packet refreshed from the fields above: fact question, source check, and evidence binder request are ready for attorney review.`}function h(e,t,n,r){let i=p(t,e.matterValue),a=p(n,e.intakeValue),o=p(r,e.target);return e.key===`beginner`?[`Matter checked: ${i}.`,`Request captured: ${a}.`,`Draft letter is prepared, but sending remains blocked until attorney approval.`,`Posting fit: ${o}.`]:e.key===`medium`?[`Inbound item checked: ${i}.`,`Risk language reviewed from message: ${a}.`,`Automatic reply remains blocked because the item needs legal review.`,`Posting fit: ${o}.`]:[`Research matter framed: ${i}.`,`Question and binder request captured from: ${a}.`,`No legal reference is allowed into the packet unless it has a clickable source.`,`Posting fit: ${o}.`]}function g(e){let t=new Intl.DateTimeFormat(`en-US`,{hour:`2-digit`,minute:`2-digit`}).format(new Date);return e.key===`beginner`?[`${t} fields edited on-screen`,`${t} checklist packet refreshed`,`${t} draft saved; attorney approval still required`]:e.key===`medium`?[`${t} message triaged from edited fields`,`${t} high-risk summary refreshed`,`${t} outside reply blocked until attorney review`]:[`${t} research question refreshed`,`${t} evidence binder request prepared`,`${t} source check required before attorney use`]}function _(e,t){e&&e.replaceChildren(...t.map(e=>{let t=document.createElement(`li`);return t.textContent=e,t}))}function v(e){return e.key===`beginner`?`Attorney Review Packet - Contract and Correspondence`:e.key===`medium`?`Attorney Review Packet - Complaint Escalation`:`Attorney Review Packet - Research and Evidence`}function y(e){return e.key===`beginner`?`Recommended next step: attorney reviews the flagged contract terms and approves any outside correspondence.`:e.key===`medium`?`Recommended next step: attorney controls the response; no automatic outside reply is sent.`:`Recommended next step: attorney verifies sources before relying on any legal reference or evidence binder.`}function b(e,t,n,r,i){return[v(e),``,`Matter: ${p(t,e.matterValue)}`,`Risk: ${e.risk}`,`Posting fit: ${p(r,e.target)}`,``,`Intake`,p(n,e.intakeValue),``,`Prepared Work`,...i.map(e=>`- ${e}`),``,`Sources To Check`,...e.sourceLinks.map(e=>`- ${e}`),``,`Attorney Gate`,y(e)].join(`
+`)}function x(e,t){let n=document.createElement(`a`),r=URL.createObjectURL(new Blob([t],{type:`text/plain`}));n.href=r,n.download=e,document.body.append(n),n.click(),n.remove(),URL.revokeObjectURL(r)}function S(e){let t=n.find(t=>t.key===e)??n[0];o.forEach(e=>{let n=e.dataset.demo===t.key;e.classList.toggle(`is-active`,n),e.setAttribute(`aria-selected`,String(n)),e.setAttribute(`tabindex`,n?`0`:`-1`)}),s.setAttribute(`aria-labelledby`,`tab-${t.key}`),s.innerHTML=`
     <div class="console__top">
       <section class="intake" aria-label="${t.level} intake">
         <div>
@@ -145,6 +146,21 @@
           Edit the fields, then run the helper to refresh the work packet.
         </p>
 
+        <div class="packet-actions" aria-label="Attorney packet actions">
+          <button class="button button--primary packet-preview-button" type="button">
+            Open attorney packet
+          </button>
+          <button class="button button--secondary print-packet-button" type="button">
+            Print / save PDF
+          </button>
+          <button class="button button--secondary download-packet-button" type="button">
+            Download packet
+          </button>
+        </div>
+        <p class="packet-status" role="status" aria-live="polite">
+          No attorney packet generated yet.
+        </p>
+
         <button class="button button--primary approval-button" type="button" data-approval="${t.key}">
           ${t.approvalCopy}
         </button>
@@ -195,4 +211,55 @@
         </ul>
       </article>
     </div>
-  `;let r=s.querySelector(`.scenario-select`),i=s.querySelector(`.matter-field`),a=s.querySelector(`.intake-field`),c=s.querySelector(`.target-field`),l=s.querySelector(`.run-button`),u=s.querySelector(`.run-status`),d=s.querySelector(`.result-summary`),p=s.querySelector(`.findings-list`),v=s.querySelector(`.audit-list`),y=s.querySelector(`.approval-button`),b=s.querySelector(`.approval-status`);r?.addEventListener(`change`,()=>{let e=Number(r.value),n=t.scenarioOptions[e];!n||!i||!a||!c||(i.value=n.matter,a.value=n.intake,c.value=n.target,u&&(u.textContent=`Scenario loaded. Run the helper to refresh the work packet.`),b&&(b.textContent=`Waiting for attorney approval before anything leaves the office.`))}),l?.addEventListener(`click`,()=>{let e=i?.value??``,n=a?.value??``,r=c?.value??``;d&&(d.textContent=m(t)),_(p,h(t,e,n,r)),_(v,g(t)),u&&(u.textContent=`Work packet refreshed from the fields on this screen.`),b&&(b.textContent=`Packet refreshed. Attorney approval is still required before anything leaves the office.`)}),y?.addEventListener(`click`,()=>{b&&(b.textContent=`${t.approvalCopy} opened. Nothing is sent outside the office until the attorney signs off.`)})}o.forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.demo;t&&v(t)}),e.addEventListener(`keydown`,t=>{let n=o.indexOf(e),r=o.length-1,i;if(t.key===`ArrowRight`&&(i=n===r?0:n+1),t.key===`ArrowLeft`&&(i=n===0?r:n-1),t.key===`Home`&&(i=0),t.key===`End`&&(i=r),i===void 0)return;t.preventDefault();let a=o[i],s=a.dataset.demo;s&&(a.focus(),v(s))})}),v(`beginner`),d();
+
+    <section class="attorney-packet" aria-labelledby="packet-heading">
+      <div class="packet-paper">
+        <div class="packet-header">
+          <div>
+            <p class="eyebrow">End product</p>
+            <h3 id="packet-heading">${v(t)}</h3>
+          </div>
+          <span class="packet-stamp">Attorney review required</span>
+        </div>
+
+        <dl class="packet-grid">
+          <div>
+            <dt>Matter</dt>
+            <dd class="packet-matter">${t.matterValue}</dd>
+          </div>
+          <div>
+            <dt>Risk</dt>
+            <dd>${t.risk}</dd>
+          </div>
+          <div>
+            <dt>Prepared by</dt>
+            <dd>AI assistant draft for legal review</dd>
+          </div>
+        </dl>
+
+        <section class="packet-section">
+          <h4>Intake Summary</h4>
+          <p class="packet-intake">${t.intakeValue}</p>
+        </section>
+
+        <section class="packet-section">
+          <h4>Attorney Review Items</h4>
+          <ul class="packet-findings">
+            ${t.findings.map(e=>`<li>${e}</li>`).join(``)}
+          </ul>
+        </section>
+
+        <section class="packet-section">
+          <h4>Sources To Check</h4>
+          <ul class="packet-sources">
+            ${t.sourceLinks.map(e=>`<li>${e}</li>`).join(``)}
+          </ul>
+        </section>
+
+        <section class="packet-section packet-section--decision">
+          <h4>Attorney Gate</h4>
+          <p class="packet-decision">${y(t)}</p>
+        </section>
+      </div>
+    </section>
+  `;let r=s.querySelector(`.scenario-select`),i=s.querySelector(`.matter-field`),a=s.querySelector(`.intake-field`),c=s.querySelector(`.target-field`),l=s.querySelector(`.run-button`),u=s.querySelector(`.run-status`),d=s.querySelector(`.packet-preview-button`),S=s.querySelector(`.print-packet-button`),C=s.querySelector(`.download-packet-button`),w=s.querySelector(`.packet-status`),T=s.querySelector(`.attorney-packet`),E=s.querySelector(`.packet-matter`),D=s.querySelector(`.packet-intake`),O=s.querySelector(`.packet-findings`),k=s.querySelector(`.packet-sources`),A=s.querySelector(`.packet-decision`),j=s.querySelector(`.result-summary`),M=s.querySelector(`.findings-list`),N=s.querySelector(`.audit-list`),P=s.querySelector(`.approval-button`),F=s.querySelector(`.approval-status`),I=b(t,t.matterValue,t.intakeValue,t.target,t.findings),L=(e=!1)=>{let n=i?.value??``,r=a?.value??``,o=c?.value??``,s=h(t,n,r,o);E&&(E.textContent=p(n,t.matterValue)),D&&(D.textContent=p(r,t.intakeValue)),_(O,s),_(k,t.sourceLinks),A&&(A.textContent=y(t)),I=b(t,n,r,o,s),w&&(w.textContent=`Attorney review packet generated. Use print to save it as PDF.`),e&&T?.scrollIntoView({behavior:`smooth`,block:`start`})};r?.addEventListener(`change`,()=>{let e=Number(r.value),n=t.scenarioOptions[e];!n||!i||!a||!c||(i.value=n.matter,a.value=n.intake,c.value=n.target,u&&(u.textContent=`Scenario loaded. Run the helper to refresh the work packet.`),w&&(w.textContent=`Scenario loaded. Open the attorney packet to generate the end product.`),F&&(F.textContent=`Waiting for attorney approval before anything leaves the office.`))}),l?.addEventListener(`click`,()=>{let e=i?.value??``,n=a?.value??``,r=c?.value??``,o=h(t,e,n,r);j&&(j.textContent=m(t)),_(M,o),_(N,g(t)),L(),u&&(u.textContent=`Work packet refreshed from the fields on this screen.`),F&&(F.textContent=`Packet refreshed. Attorney approval is still required before anything leaves the office.`)}),d?.addEventListener(`click`,()=>{L(!0)}),S?.addEventListener(`click`,()=>{L(),window.print()}),C?.addEventListener(`click`,()=>{L(),x(`${t.key}-attorney-review-packet.txt`,I)}),P?.addEventListener(`click`,()=>{F&&(F.textContent=`${t.approvalCopy} opened. Nothing is sent outside the office until the attorney signs off.`)})}o.forEach(e=>{e.addEventListener(`click`,()=>{let t=e.dataset.demo;t&&S(t)}),e.addEventListener(`keydown`,t=>{let n=o.indexOf(e),r=o.length-1,i;if(t.key===`ArrowRight`&&(i=n===r?0:n+1),t.key===`ArrowLeft`&&(i=n===0?r:n-1),t.key===`Home`&&(i=0),t.key===`End`&&(i=r),i===void 0)return;t.preventDefault();let a=o[i],s=a.dataset.demo;s&&(a.focus(),S(s))})}),S(`beginner`),d();
